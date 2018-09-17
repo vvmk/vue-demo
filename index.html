@@ -16,6 +16,23 @@
 
             <input type="text" v-model="newName" @keydown.ctrl.87="CtrlW" />
             <button class="btn btn-primary" @click="addName">Add Name</button>
+
+            <hr>
+
+            <input type="text" v-model="newTask" @keydown.ctrl.87="CtrlW" />
+            <button class="btn btn-primary" @click="addTask">Add Task</button>
+
+            <h1>TODO:</h1>
+            <ul>
+                <li v-for="task in todoTasks" >
+                    <span><button @click="markCompleted(task)">&nbsp;&#10003;&nbsp;</button></span>{{ task.description }}
+                </li>
+            </ul>
+
+            <h1>DONE</h1>
+            <ul>
+                <li v-for="task in completedTasks"><strike>{{ task.description }}</strike></li>
+            </ul>
         </div>
 
         <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
@@ -26,11 +43,41 @@
                 el: '#root',
                 data: {
                     newName: '',
+                    newTask: '',
                     greeting: 'Hello World',
                     foo: 'bar',
                     names: ['Leo', 'Mikey', 'Raph', 'Don'],
+                    tasks: [
+                        { id: 1, description: 'Go to the store', completed: true },
+                        { id: 2, description: 'Take out the trash', completed: false },
+                        { id: 3, description: 'Organize the basement', completed: false },
+                        { id: 4, description: 'Finish the laundry', completed: false },
+                        { id: 5, description: 'Learn Vue', completed: false },
+                        { id: 6, description: 'Learn Laravel', completed: true },
+                        { id: 7, description: 'Replace electrical sockets', completed: true },
+                    ],
+                },
+                computed: {
+                    todoTasks() {
+                        return this.tasks.filter(task => !task.completed);
+                    },
+                    completedTasks() {
+                        return this.tasks.filter(task => task.completed);
+                    },
                 },
                 methods: {
+                    markCompleted(task) {
+                        const index = this.tasks.indexOf(task);
+                        this.tasks[index].completed = true;
+                    },
+                    addTask() {
+                        this.tasks.push({
+                            description: this.newTask, 
+                            completed: false
+                        });
+
+                        this.newTask = '';
+                    },
                     addName() {
                         this.names.push(this.newName);
                         this.newName = '';
