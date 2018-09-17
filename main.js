@@ -1,5 +1,26 @@
 Vue.component('custom-display', {
-    template: '<h1><slot></slot></h1>'
+    template: '<h1><slot></slot></h1>',
+});
+
+Vue.component('task-list', {
+    template: '<div><ul><task v-for="task in tasks">{{ task.description }}</task></ul></div>',
+    data() {
+        return {
+            tasks: [
+                { description: 'Go to the store', completed: true },
+                { description: 'Take out the trash', completed: false },
+                { description: 'Organize the basement', completed: false },
+                { description: 'Finish the laundry', completed: false },
+                { description: 'Learn Vue', completed: false },
+                { description: 'Learn Laravel', completed: true },
+                { description: 'Replace electrical sockets', completed: true },
+            ]
+        }
+    }
+});
+
+Vue.component('task', {
+    template: '<li><slot></slot></li>',
 });
 
 var app = new Vue({
