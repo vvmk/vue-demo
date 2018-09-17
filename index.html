@@ -6,37 +6,44 @@
     <body>
 
         <div id="root">
+
             <input type="text" v-model="greeting" />
             <custom-display> {{ greeting }}</custom-display>
+            
+            <hr>
+
+            <input type="text" v-model="newName" @keydown.ctrl.87="CtrlW" />
+            <button class="btn btn-primary" @click="addName">Add Name</button>
 
             <ul>
                 <li v-for="name in names" v-text="name"></li>
             </ul>
 
-            <input type="text" v-model="newName" @keydown.ctrl.87="CtrlW" />
-            <button class="btn btn-primary" @click="addName">Add Name</button>
+            <hr>
+
+            <h1>
+                Tasks (Components):
+            </h1>
+            <task-list heading="TODO" :tasks="todoTasks"></task-list>
+            <task-list heading="DONE" :tasks="completedTasks"></task-list>
 
             <hr>
 
             <h1>
-                All Tasks (Component):
+                Tasks (No Components):
             </h1>
-            <task-list heading="TODO" :tasks="todoTasks"></task-list>
-            <task-list heading="Complete":tasks="completedTasks"></task-list>
-
-            <hr>
 
             <input type="text" v-model="newTask" @keydown.ctrl.87="CtrlW" />
             <button class="btn btn-primary" @click="addTask">Add Task</button>
 
-            <h1>TODO:</h1>
+            <h3>TODO</h3>
             <ul>
                 <li v-for="task in todoTasks" >
                     <span><button @click="markCompleted(task)">&nbsp;&#10003;&nbsp;</button></span>{{ task.description }}
                 </li>
             </ul>
 
-            <h1>DONE</h1>
+            <h3>DONE</h3>
             <ul>
                 <li v-for="task in completedTasks"><strike>{{ task.description }}</strike></li>
             </ul>
