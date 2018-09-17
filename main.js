@@ -1,5 +1,5 @@
 Vue.component('custom-display', {
-    template: '<h1>The input value is <slot></slot></h1>',
+    template: '<h1 class="title">The input value is <slot></slot></h1>',
 });
 
 Vue.component('task-list', {
