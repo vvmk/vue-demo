@@ -6,7 +6,7 @@
     <body>
 
         <div id="root">
-            <input id="input" type="text" v-model="greeting" />
+            <input type="text" v-model="greeting" />
 
             <h1>{{ foo }}</h1>
             <p>The Value of this input is {{ greeting }}.</p>
@@ -14,27 +14,30 @@
                 <li v-for="name in names" v-text="name"></li>
             </ul>
 
-            <input id="name-input" type="text" />
-            <button class="btn btn-primary" id="add-name">Add Name</button>
+            <input type="text" v-model="newName" @keydown.ctrl.87="CtrlW" />
+            <button class="btn btn-primary" @click="addName">Add Name</button>
         </div>
 
         <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
 
         <script type="text/javascript">
+
             var app = new Vue({
                 el: '#root',
                 data: {
+                    newName: '',
                     greeting: 'Hello World',
                     foo: 'bar',
                     names: ['Leo', 'Mikey', 'Raph', 'Don'],
                 },
-                mounted() {
-                    document.querySelector('#add-name').addEventListener('click', () => {
-                        let name = document.querySelector('#name-input');
-
-                        app.names.push(name.value);
-                        name.value = '';
-                    });
+                methods: {
+                    addName() {
+                        this.names.push(this.newName);
+                        this.newName = '';
+                    },
+                    CtrlW() {
+                        console.log('Ctrl-W detected');
+                    },
                 },
             });
 
