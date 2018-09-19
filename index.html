@@ -9,34 +9,37 @@
     <body>
 
         <div id="root" class="container">
+
+            <tabs>
+
+            <tab name="Modal/Events">
             <modal v-show="showModal" @closed="showModal = false">
-                These are the voyages of the Starship Enterprise. Its continuing mission, to explore strange new worlds, to seek out new life and new civilizations, to boldly go where no one has gone before. We need to neutralize the homing signal. Each unit has total environmental control, gravity, temperature, atmosphere, light, in a protective field. Sensors show energy readings in your area. We had a forced chamber explosion in the resonator coil. Field strength has increased by 3,000 percent.
+            These are the voyages of the Starship Enterprise. Its continuing mission, to explore strange new worlds, to seek out new life and new civilizations, to boldly go where no one has gone before. We need to neutralize the homing signal. Each unit has total environmental control, gravity, temperature, atmosphere, light, in a protective field. Sensors show energy readings in your area. We had a forced chamber explosion in the resonator coil. Field strength has increased by 3,000 percent.
             </modal>
 
             <button @click="showModal = true">Show Modal</button>
-
             <input type="text" v-model="greeting" />
             <custom-display> {{ greeting }}</custom-display>
+            </tab>
 
-            <hr>
-
+            <tab name="Names">
             <input type="text" v-model="newName" @keydown.ctrl.87="CtrlW" />
             <button class="btn btn-primary" @click="addName">Add Name</button>
 
             <ul>
                 <li v-for="name in names" v-text="name"></li>
             </ul>
+            </tab>
 
-            <hr>
-
+            <tab name="Tasks (with components)">
             <h1>
                 Tasks (Components):
             </h1>
             <task-list heading="TODO" :tasks="todoTasks"></task-list>
             <task-list heading="DONE" :tasks="completedTasks"></task-list>
+            </tab>
 
-            <hr>
-
+            <tab name="Tasks (without components)">
             <h1>
                 Tasks (No Components):
             </h1>
@@ -55,6 +58,9 @@
             <ul>
                 <li v-for="task in completedTasks"><strike>{{ task.description }}</strike></li>
             </ul>
+            </tab>
+
+            </tabs>
         </div>
 
         <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
