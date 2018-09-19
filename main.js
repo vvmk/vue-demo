@@ -74,7 +74,12 @@ Vue.component('custom-display', {
 
 Vue.component('task-list', {
     props: ['tasks', 'heading'],
-    template: '<div><h3>{{ heading }}</h3><ul><task-item v-for="task in tasks" :task="task"></task-item></ul></div>',
+    template: `<div>
+        <h3>{{ heading }}</h3>
+        <ul>
+            <task-item v-for="task in tasks" :task="task"></task-item>
+        </ul>
+    </div>`,
 });
 
 Vue.component('task-item', {

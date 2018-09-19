@@ -34,8 +34,14 @@
                     <h1>
                         Tasks (Components):
                     </h1>
-                    <task-list heading="TODO" :tasks="todoTasks"></task-list>
-                    <task-list heading="DONE" :tasks="completedTasks"></task-list>
+                    <div class="columns is-variable is-3">
+                        <div class="column is-one-quarter has-background-primary">
+                        <task-list heading="TODO" :tasks="todoTasks"></task-list>
+                        </div>
+                        <div class="column is-one-quarter has-background-primary">
+                        <task-list heading="DONE" :tasks="completedTasks"></task-list>
+                        </div>
+                    </div>
                 </tab>
 
                 <tab name="Tasks Without Components">
