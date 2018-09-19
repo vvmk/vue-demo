@@ -1,3 +1,12 @@
+Vue.component('coupon', {
+    template: '<input type="text" placeholder="Enter your coupon code here" @blur="onCouponApplied" />',
+    methods: {
+        onCouponApplied() {
+            this.$emit('applied');
+        },
+    },
+});
+
 Vue.component('tabs', {
     template: `
 <div>
@@ -114,6 +123,9 @@ var app = new Vue({
         },
     },
     methods: {
+        onCouponApplied() {
+            alert('coupon applied!');
+        },
         markCompleted(task) {
             const index = this.tasks.indexOf(task);
             this.tasks[index].completed = true;
