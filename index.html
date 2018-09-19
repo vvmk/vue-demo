@@ -15,13 +15,13 @@
 
             <tabs>
 
-                <tab name="Modal/Events" :selected="true">
+                <tab name="Show Modal" :selected="true">
                     <button @click="showModal = true">Show Modal</button>
                     <input type="text" v-model="greeting" />
                     <custom-display> {{ greeting }}</custom-display>
                 </tab>
 
-                <tab name="Names">
+                <tab name="Add Names">
                     <input type="text" v-model="newName" @keydown.ctrl.87="CtrlW" />
                     <button class="btn btn-primary" @click="addName">Add Name</button>
 
@@ -30,7 +30,7 @@
                     </ul>
                 </tab>
 
-                <tab name="Tasks (with components)">
+                <tab name="Tasks With Components">
                     <h1>
                         Tasks (Components):
                     </h1>
@@ -38,7 +38,7 @@
                     <task-list heading="DONE" :tasks="completedTasks"></task-list>
                 </tab>
 
-                <tab name="Tasks (without components)">
+                <tab name="Tasks Without Components">
                     <h1>
                         Tasks (No Components):
                     </h1>
