@@ -1,3 +1,17 @@
+Vue.component('modal', {
+    template: `<div class="modal is-active">
+                <div class="modal-background"></div>
+                <div class="modal-content">
+                    <div class="box">
+                        <p>
+                        <slot></slot>
+                        </p>
+                    </div>
+                </div>
+                <button class="modal-close is-large" aria-label="close" @click="$emit('closed')"></button>
+            </div>`
+});
+
 Vue.component('custom-display', {
     template: '<h1 class="title">The input value is <slot></slot></h1>',
 });
@@ -15,6 +29,7 @@ Vue.component('task-item', {
 var app = new Vue({
     el: '#root',
     data: {
+        showModal: false,
         newName: '',
         newTask: '',
         greeting: 'Hello World',
