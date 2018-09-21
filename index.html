@@ -9,6 +9,7 @@
     <body>
 
         <div id="root" class="container">
+
             <modal v-show="showModal" @closed="showModal = false">
             <template slot="header">Space, the final frontier.</template>
             <template slot="content">
@@ -20,12 +21,17 @@
             </template>
             </modal>
 
+            <input type="text" v-model="greeting" />
+            <custom-display> {{ greeting }}</custom-display>
+
+            <progress-view inline-template>
+                <h1>Your Progress is {{ completion }}</h1>
+            </progress-view>
+
             <tabs>
 
             <tab name="Show Modal" :selected="true">
             <button @click="showModal = true">Show Modal</button>
-            <input type="text" v-model="greeting" />
-            <custom-display> {{ greeting }}</custom-display>
             </tab>
 
             <tab name="Add Names">

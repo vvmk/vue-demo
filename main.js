@@ -13,6 +13,14 @@ window.Event = new class {
 
 }
 
+// example of an in-line template
+Vue.component('progress-view', {
+    data() {
+        return { completion: '50%' };
+    },
+});
+
+
 Vue.component('coupon', {
     template: '<input type="text" placeholder="Enter your coupon code here" @blur="onCouponApplied" />',
     methods: {
