@@ -1,8 +1,10 @@
+window.Event = new Vue();
+
 Vue.component('coupon', {
     template: '<input type="text" placeholder="Enter your coupon code here" @blur="onCouponApplied" />',
     methods: {
         onCouponApplied() {
-            this.$emit('applied');
+            Event.$emit('applied');
         },
     },
 });
@@ -32,6 +34,9 @@ Vue.component('tabs', {
     },
     created() {
         this.tabs = this.$children;
+        Event.$on('applied', () => {
+            alert('Handling it!');
+        });
     },
     methods: {
         selectTab(selectedTab) {
