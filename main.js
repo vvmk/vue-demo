@@ -98,8 +98,9 @@ Vue.component('modal', {
         <slot name="content"></slot>
     </section>
     <footer class="modal-card-foot">
-      <button class="button is-success">Save changes</button>
-      <button class="button">Cancel</button>
+    <slot name="footer">
+      <button class="button">Ok!</button>
+    </slot>
     </footer>
   </div>
 </div>`
