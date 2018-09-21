@@ -1,10 +1,24 @@
-window.Event = new Vue();
+// window.Event = new Vue();
+window.Event = new class {
+    constructor() {
+        this.vue = new Vue();
+    }
+
+    fire(event, data = null) {
+        this.vue.$emit(event, data);
+    }
+
+    listen(event, callback) {
+        this.vue.$on(event, callback);
+    }
+
+}
 
 Vue.component('coupon', {
     template: '<input type="text" placeholder="Enter your coupon code here" @blur="onCouponApplied" />',
     methods: {
         onCouponApplied() {
-            Event.$emit('applied');
+            Event.fire('applied');
         },
     },
 });
@@ -25,7 +39,7 @@ Vue.component('tabs', {
     </div>
 </div>`,
     mounted() {
-        console.log(this.$children);
+        console.log('tabs children: ', this.$children);
     },
     data() {
         return {
@@ -34,7 +48,8 @@ Vue.component('tabs', {
     },
     created() {
         this.tabs = this.$children;
-        Event.$on('applied', () => {
+        Event.listen('applied', () => {
+            this.couponApplied = true;
             alert('Handling it!');
         });
     },
