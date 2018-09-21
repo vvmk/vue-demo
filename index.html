@@ -10,65 +10,68 @@
 
         <div id="root" class="container">
             <modal v-show="showModal" @closed="showModal = false">
+            <template slot="header">Space, the final frontier.</template>
+            <template slot="content">
                 These are the voyages of the Starship Enterprise. Its continuing mission, to explore strange new worlds, to seek out new life and new civilizations, to boldly go where no one has gone before. We need to neutralize the homing signal. Each unit has total environmental control, gravity, temperature, atmosphere, light, in a protective field. Sensors show energy readings in your area. We had a forced chamber explosion in the resonator coil. Field strength has increased by 3,000 percent.
+            </template>
             </modal>
 
             <tabs>
 
-                <tab name="Show Modal" :selected="true">
-                    <button @click="showModal = true">Show Modal</button>
-                    <input type="text" v-model="greeting" />
-                    <custom-display> {{ greeting }}</custom-display>
-                </tab>
+            <tab name="Show Modal" :selected="true">
+            <button @click="showModal = true">Show Modal</button>
+            <input type="text" v-model="greeting" />
+            <custom-display> {{ greeting }}</custom-display>
+            </tab>
 
-                <tab name="Add Names">
-                    <input type="text" v-model="newName" @keydown.ctrl.87="CtrlW" />
-                    <button class="btn btn-primary" @click="addName">Add Name</button>
+            <tab name="Add Names">
+            <input type="text" v-model="newName" @keydown.ctrl.87="CtrlW" />
+            <button class="btn btn-primary" @click="addName">Add Name</button>
 
-                    <ul>
-                        <li v-for="name in names" v-text="name"></li>
-                    </ul>
-                </tab>
+            <ul>
+                <li v-for="name in names" v-text="name"></li>
+            </ul>
+            </tab>
 
-                <tab name="Tasks With Components">
-                    <h1>
-                        Tasks (Components):
-                    </h1>
-                    <div class="columns is-variable is-3">
-                        <div class="column is-one-quarter has-background-primary">
-                        <task-list heading="TODO" :tasks="todoTasks"></task-list>
-                        </div>
-                        <div class="column is-one-quarter has-background-primary">
-                        <task-list heading="DONE" :tasks="completedTasks"></task-list>
-                        </div>
-                    </div>
-                </tab>
+            <tab name="Tasks With Components">
+            <h1>
+                Tasks (Components):
+            </h1>
+            <div class="columns is-variable is-3">
+                <div class="column is-one-quarter has-background-primary">
+                    <task-list heading="TODO" :tasks="todoTasks"></task-list>
+                </div>
+                <div class="column is-one-quarter has-background-primary">
+                    <task-list heading="DONE" :tasks="completedTasks"></task-list>
+                </div>
+            </div>
+            </tab>
 
-                <tab name="Tasks Without Components">
-                    <h1>
-                        Tasks (No Components):
-                    </h1>
+            <tab name="Tasks Without Components">
+            <h1>
+                Tasks (No Components):
+            </h1>
 
-                    <input type="text" v-model="newTask" @keydown.ctrl.87="CtrlW" />
-                    <button class="btn btn-primary" @click="addTask">Add Task</button>
+            <input type="text" v-model="newTask" @keydown.ctrl.87="CtrlW" />
+            <button class="btn btn-primary" @click="addTask">Add Task</button>
 
-                    <h3>TODO</h3>
-                    <ul>
-                        <li v-for="task in todoTasks" >
-                            <span><button @click="markCompleted(task)">&nbsp;&#10003;&nbsp;</button></span>{{ task.description }}
-                        </li>
-                    </ul>
+            <h3>TODO</h3>
+            <ul>
+                <li v-for="task in todoTasks" >
+                    <span><button @click="markCompleted(task)">&nbsp;&#10003;&nbsp;</button></span>{{ task.description }}
+                </li>
+            </ul>
 
-                    <h3>DONE</h3>
-                    <ul>
-                        <li v-for="task in completedTasks"><strike>{{ task.description }}</strike></li>
-                    </ul>
-                </tab>
+            <h3>DONE</h3>
+            <ul>
+                <li v-for="task in completedTasks"><strike>{{ task.description }}</strike></li>
+            </ul>
+            </tab>
 
-                <tab name="Coupon Events">
-                <h1>Coupons</h1>
-                <coupon @applied="onCouponApplied"></coupon>
-                </tab>
+            <tab name="Coupon Events">
+            <h1>Coupons</h1>
+            <coupon @applied="onCouponApplied"></coupon>
+            </tab>
             </tabs>
         </div>
 
