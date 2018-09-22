@@ -1,5 +1,7 @@
 <template>
   <div id="app">
+    <counter></counter>
+    <counter></counter>
     <message>Hello, World!</message>
     <message>Hello, World!</message>
     <message>Hello, World!</message>
@@ -8,12 +10,14 @@
 </template>
 
 <script>
-import Message from "./components/Message.vue";
+import Message from './components/Message.vue';
+import Counter from './components/Counter.vue';
 
 export default {
   name: "app",
   components: {
-    Message
+    Message,
+    Counter,
   },
   data() {
     return {
