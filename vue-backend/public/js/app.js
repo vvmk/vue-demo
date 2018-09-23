@@ -26,13 +26,25 @@ class Errors {
   }
 }
 
+class Form {
+  constructor(data) {
+    this.data = data;
+
+    for (let field in data) {
+      this[field] = data[field];
+    }
+  }
+}
+
 new Vue({
   el: '#form',
 
   data: {
-    name: '',
-    description: '',
     skills: [],
+    form: new Form({
+      name: '',
+      description: '',
+    }),
     errors: new Errors(),
   },
 
