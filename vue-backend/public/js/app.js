@@ -1,12 +1,22 @@
 new Vue({
-    el: '#root',
+  el: '#form',
 
-    data: {
-        skills: []
-    },
+  data: {
+    name: '',
+    description: '',
+    skills: [],
+  },
 
-    mounted() {
-        axios.get('/skills').then(response => this.skills = response.data);
+  methods: {
+    onSubmit() {
+      axios.post('/projects', {
+        name: this.name,
+        description: this.description,
+      });
     },
+  },
+
+  mounted() {
+    axios.get('/skills').then(response => this.skills = response.data);
+  },
 });
-

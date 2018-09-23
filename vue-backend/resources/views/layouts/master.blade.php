@@ -68,7 +68,7 @@ html, body {
     <body>
         <div class="container">
             <div id="root">
-                @yield('content')
+               @yield('content')
             </div>
         </div>
 
