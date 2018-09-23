@@ -96,6 +96,13 @@ class Form {
     this.clearErrors();
   }
 
+  post(url) {
+    return this.submit('post', url);
+  }
+
+  delete(url) {
+    return this.submit('delete', url);
+  }
 }
 
 new Vue({
@@ -111,7 +118,7 @@ new Vue({
 
   methods: {
     onSubmit() {
-      this.form.submit('post', '/projects')
+      this.form.post('/projects')
         .then(response => console.log(response))
         .catch(errors => console.log(errors));
     },
