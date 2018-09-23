@@ -1,7 +1,7 @@
 @extends ('layouts.master')
 @section ('content')
 <div id="form">
-    <form method="POST" action="/projects" @submit.prevent="onSubmit" @keydown="form.clearErrors($event.target.name)">
+    <form method="POST" action="/projects" @submit.prevent="onSubmit()" @keydown="form.clearErrors($event.target.name)">
         @csrf
         <div class="field">
             <label class="label" for="name">Name</label>

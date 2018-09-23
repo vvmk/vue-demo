@@ -30,7 +30,7 @@ class Errors {
 
 class Form {
   constructor(data) {
-    this.data = data;
+    this.originalData = data;
 
     for (let field in data) {
       this[field] = data[field];
@@ -41,7 +41,9 @@ class Form {
 
   submit(requestType, url) {
 
-    axios[requestType](url, this)
+    console.log(this.requestBody);
+
+    axios[requestType](url, this.requestBody)
       .then(response => this.onSuccess(response))
       .catch(error => this.onFail(error));
   }
@@ -61,9 +63,19 @@ class Form {
     this.errors.clear(field);
   }
 
+  
+  get requestBody() {
+    let d = Object.assign({}, this);
+    
+    delete d.originalData;
+    delete d.errors;
+
+    return d;
+  }
+
   reset() {
-    for (let k in this.data) {
-      delete this.data[k];
+    for (let k in this.originalData) {
+      delete this.originalData[k];
     }
   }
 
