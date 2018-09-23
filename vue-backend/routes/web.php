@@ -11,9 +11,8 @@
 |
  */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'ProjectController@create')->name('home');
+Route::post('/projects', 'ProjectController@store');
 
 // Remember: returning something directly from this method 
 // (something that isn't a view) it is automatically converted
