@@ -1,5 +1,6 @@
 @extends ('layouts.master')
 @section ('content')
+@include ('projects.list')
 <div id="form">
     <form method="POST" action="/projects" @submit.prevent="onSubmit">
         @csrf
