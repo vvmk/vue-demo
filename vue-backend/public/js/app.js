@@ -42,8 +42,15 @@ new Vue({
         name: this.name,
         description: this.description,
       })
-      .then(response => alert('success'))
+      .then(response => this.onSuccess(response))
       .catch(error => this.errors.record(error.response.data.errors));
+    },
+
+    onSuccess(response) {
+      alert(response.data.message);
+
+      this.name = '';
+      this.description = '';
     },
   },
 
