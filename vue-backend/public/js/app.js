@@ -14,9 +14,13 @@ class Errors {
   }
 
   clear(field) {
-    if (field) delete this.errors[field];
-    else
-      this.errors = {};
+    if (field) {
+      delete this.errors[field];
+
+      return;
+    }
+    
+    this.errors = {};
   }
 
   has(field) {
@@ -40,9 +44,6 @@ class Form {
   }
 
   submit(requestType, url) {
-
-    console.log(this.requestBody);
-
     axios[requestType](url, this.requestBody)
       .then(response => this.onSuccess(response))
       .catch(error => this.onFail(error));
@@ -75,7 +76,7 @@ class Form {
 
   reset() {
     for (let k in this.originalData) {
-      delete this.originalData[k];
+      this[k] = '';
     }
   }
 
