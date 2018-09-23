@@ -50,10 +50,7 @@ new Vue({
 
   methods: {
     onSubmit() {
-      axios.post('/projects', {
-        name: this.name,
-        description: this.description,
-      })
+      axios.post('/projects', this.form)
       .then(response => this.onSuccess(response))
       .catch(error => this.errors.record(error.response.data.errors));
     },
