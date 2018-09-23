@@ -14,7 +14,15 @@ class Errors {
   }
 
   clear(field) {
-    this.errors[field] = null;
+    delete this.errors[field];
+  }
+
+  has(field) {
+    return !!this.errors[field];
+  }
+
+  any() {
+    return Object.keys(this.errors).length > 0;
   }
 }
 

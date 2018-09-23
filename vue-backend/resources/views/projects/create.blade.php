@@ -9,7 +9,7 @@
             <div class="control">
                 <input class="input" id="name" type="text" name="name" v-model="name" >
 
-                <span class="help is-danger" v-text="errors.get('name')"></span>
+                <span class="help is-danger" v-if="errors.has('name')" v-text="errors.get('name')"></span>
             </div>
         </div>
         <div class="field">
@@ -17,10 +17,10 @@
             <div class="control">
                 <input class="input" id="description" type="text" name="description" v-model="description" >
 
-                <span class="help is-danger" v-text="errors.get('description')"></span>
+                <span class="help is-danger" v-if="errors.has('description')" v-text="errors.get('description')"></span>
             </div>
         </div>
-        <button class="button is-primary" type="submit">Create</button>
+        <button class="button is-primary" type="submit" :disabled="errors.any()">Create</button>
     </form>
 </div>
 @endsection
