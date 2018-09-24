@@ -1,38 +1,6 @@
-class Errors {
-  constructor() {
-    this.errors = {}
-  }
+import Errors from './Errors.js';
 
-  get(field) {
-    if (this.errors[field]) {
-      return this.errors[field][0];
-    }
-  }
-
-  record(errors) {
-    this.errors = errors;
-  }
-
-  clear(field) {
-    if (field) {
-      delete this.errors[field];
-
-      return;
-    }
-
-    this.errors = {};
-  }
-
-  has(field) {
-    return !!this.errors[field];
-  }
-
-  any() {
-    return Object.keys(this.errors).length > 0;
-  }
-}
-
-class Form {
+export class Form {
   constructor(data) {
     this.originalData = data;
 
@@ -105,26 +73,3 @@ class Form {
   }
 }
 
-new Vue({
-  el: '#form',
-
-  data: {
-    skills: [],
-    form: new Form({
-      name: '',
-      description: '',
-    }),
-  },
-
-  methods: {
-    onSubmit() {
-      this.form.post('/projects')
-        .then(response => console.log(response))
-        .catch(errors => console.log(errors));
-    },
-  },
-
-  mounted() {
-    axios.get('/skills').then(response => this.skills = response.data);
-  },
-});
