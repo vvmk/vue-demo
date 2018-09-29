@@ -1,9 +1,13 @@
 import axios from 'axios';
+import VueRouter from 'vue-router';
 import Vue from 'vue';
 
-window.axios = axios;
 window.Vue = Vue;
 
+// tell vue to use the router plugin
+Vue.use(VueRouter);
+
+window.axios = axios;
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /**
