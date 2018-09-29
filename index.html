@@ -22,7 +22,7 @@
             </modal>
 
             <input type="text" v-model="greeting" />
-            <custom-display> {{ greeting }}</custom-display>
+            <custom-display>{{ greeting }}</custom-display>
 
             <progress-view inline-template>
                 <h1>Your Progress is {{ completion }}</h1>
@@ -79,8 +79,28 @@
             </tab>
 
             <tab name="Coupon Events">
-            <h1>Coupons</h1>
-            <coupon @applied="onCouponApplied"></coupon>
+                <h1>Coupons</h1>
+                <coupon @applied="onCouponApplied"></coupon>
+            </tab>
+
+            <tab name="Custom Inputs">
+            <div class="field">
+                <div class="control">
+                    <label for="shorthand">Short way (v-model)</label>
+                    <input id="shorthand" class="is-primary" type="text" v-model='couponCode' />
+                </div>
+            </div>
+            <div class="field">
+                <div class="control">
+                    <label for="longhand">Long way (:value, @input)</label>
+                    <input id="longhand" type="text" :value="couponCode" @input="couponCode = $event.target.value" />
+                </div>
+            </div>
+
+            <label for="customCouponInput">Custom Input Component</label>
+            <coupon-input v-model="couponCode"></coupon-input>
+            <p>Coupon code prop: {{ couponCode }}</p>
+
             </tab>
             </tabs>
         </div>

@@ -13,6 +13,19 @@ window.Event = new class {
 
 }
 
+Vue.component('coupon-input', {
+    props: ['value'],
+    template: `
+        <input id="customCouponInput" type="text" :value="value" @input="updateCode($event.target.value)">
+    `,
+    methods: {
+        updateCode(code) {
+            this.$emit('input', code);
+        }
+    },
+});
+
+
 // example of an in-line template
 Vue.component('progress-view', {
     data() {
@@ -57,7 +70,7 @@ Vue.component('tabs', {
         this.tabs = this.$children;
         Event.listen('applied', () => {
             this.couponApplied = true;
-            alert('Handling it!');
+            //alert('Handling it!');
         });
     },
     methods: {
@@ -150,6 +163,7 @@ var app = new Vue({
             { description: 'Learn Laravel', completed: true },
             { description: 'Replace electrical sockets', completed: true },
         ],
+        couponCode: 'FREEBIE',
     },
     computed: {
         todoTasks() {
