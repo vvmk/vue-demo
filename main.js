@@ -16,10 +16,26 @@ window.Event = new class {
 Vue.component('coupon-input', {
     props: ['value'],
     template: `
-        <input id="customCouponInput" type="text" :value="value" @input="updateCode($event.target.value)">
+        <input id="customCouponInput" type="text" :value="value" @input="updateCode($event.target.value)" ref="input">
     `,
+    data() {
+        return {
+            invalidCodes: [
+                'ALLFREE',
+                'JUNE',
+            ]
+        }
+    },
     methods: {
         updateCode(code) {
+            // Validation
+            if (this.invalidCodes.includes(code)) {
+                alert('This coupon is no longer valid');
+
+                this.$refs.input.value = 'code';
+            }
+
+            // emit the input event required to use v-model
             this.$emit('input', code);
         }
     },
