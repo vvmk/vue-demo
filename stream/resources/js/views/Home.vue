@@ -1,12 +1,18 @@
 <template>
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card card-default">
-                    <div class="card-header">Home Page</div>
+        <div class="columns">
+            <div class="column">
+                <div class="message" v-for="status in statuses">
+                    <div class="message-header">
+                        <p>
+                        {{ status.user.name }} said...
+                        </p>
 
-                    <div class="card-body">
-                        I'm an example component.
+                        <p>
+                        {{ status.created_at }}
+                        </p>
+                    </div>
+                    <div class="message-body" v-text="status.body">
                     </div>
                 </div>
             </div>
@@ -16,6 +22,16 @@
 
 <script>
 export default {
+    data() {
+        return {
+            statuses: []
+        };
+    },
+    created() {
+        axios
+            .get("/statuses")
+            .then(response => (this.statuses = response.data));
+    },
     mounted() {
         console.log("Component mounted.");
     }
