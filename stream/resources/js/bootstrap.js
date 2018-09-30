@@ -1,4 +1,3 @@
-// window.axios = require('axios');
 import axios from 'axios';
 import Vue from 'vue';
 import VueRouter from 'vue-router';
