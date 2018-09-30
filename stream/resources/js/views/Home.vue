@@ -22,6 +22,7 @@
 
 <script>
 import moment from "moment";
+import Status from "../models/Status";
 
 export default {
     data() {
@@ -30,9 +31,7 @@ export default {
         };
     },
     created() {
-        axios
-            .get("/statuses")
-            .then(response => (this.statuses = response.data));
+        Status.all(statuses => (this.statuses = statuses));
     },
     methods: {
         postedOn(status) {
