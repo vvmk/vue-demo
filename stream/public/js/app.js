@@ -15947,6 +15947,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_moment__ = __webpack_require__(50);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_moment__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__models_Status__ = __webpack_require__(176);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_AddToStream__ = __webpack_require__(177);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_AddToStream___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_AddToStream__);
 //
 //
 //
@@ -15969,11 +15971,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+
 
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+    components: {
+        AddToStream: __WEBPACK_IMPORTED_MODULE_2__components_AddToStream___default.a
+    },
     data: function data() {
         return {
             statuses: []
@@ -16019,34 +16027,39 @@ var render = function() {
       _c(
         "div",
         { staticClass: "column" },
-        _vm._l(_vm.statuses, function(status) {
-          return _c("div", { staticClass: "message" }, [
-            _c("div", { staticClass: "message-header" }, [
-              _c("p", [
-                _vm._v(
-                  "\n                    " +
-                    _vm._s(status.user.name) +
-                    " said...\n                    "
-                )
+        [
+          _vm._l(_vm.statuses, function(status) {
+            return _c("div", { staticClass: "message" }, [
+              _c("div", { staticClass: "message-header" }, [
+                _c("p", [
+                  _vm._v(
+                    "\n                    " +
+                      _vm._s(status.user.name) +
+                      " said...\n                    "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("p", [
+                  _vm._v(
+                    "\n                    " +
+                      _vm._s(
+                        _vm._f("capitalize")(_vm._f("ago")(status.createdAt))
+                      ) +
+                      "\n                    "
+                  )
+                ])
               ]),
               _vm._v(" "),
-              _c("p", [
-                _vm._v(
-                  "\n                    " +
-                    _vm._s(
-                      _vm._f("capitalize")(_vm._f("ago")(status.createdAt))
-                    ) +
-                    "\n                    "
-                )
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", {
-              staticClass: "message-body",
-              domProps: { textContent: _vm._s(status.body) }
-            })
-          ])
-        })
+              _c("div", {
+                staticClass: "message-body",
+                domProps: { textContent: _vm._s(status.body) }
+              })
+            ])
+          }),
+          _vm._v(" "),
+          _c("add-to-stream")
+        ],
+        2
       )
     ])
   ])
@@ -32986,6 +32999,88 @@ var Status = function () {
 }();
 
 /* harmony default export */ __webpack_exports__["a"] = (Status);
+
+/***/ }),
+/* 177 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(37)
+/* script */
+var __vue_script__ = __webpack_require__(178)
+/* template */
+var __vue_template__ = __webpack_require__(179)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/AddToStream.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-bcc28afe", Component.options)
+  } else {
+    hotAPI.reload("data-v-bcc28afe", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 178 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({});
+
+/***/ }),
+/* 179 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [_vm._v("\n    foobar\n")])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-bcc28afe", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

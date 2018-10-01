@@ -1,0 +1,9 @@
+<template>
+    <div>
+        foobar
+    </div>
+</template>
+
+<script>
+export default {};
+</script>
