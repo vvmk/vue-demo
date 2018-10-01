@@ -33081,6 +33081,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -33125,31 +33134,56 @@ var render = function() {
           }
         },
         [
-          _c("p", { staticClass: "control" }, [
-            _c("textarea", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.form.body,
-                  expression: "form.body"
-                }
-              ],
-              staticClass: "textarea",
-              attrs: { placeholder: "I have something to say..." },
-              domProps: { value: _vm.form.body },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
+          _c("div", { staticClass: "field" }, [
+            _c("p", { staticClass: "control" }, [
+              _c("textarea", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.body,
+                    expression: "form.body"
                   }
-                  _vm.$set(_vm.form, "body", $event.target.value)
+                ],
+                staticClass: "textarea",
+                attrs: { placeholder: "I have something to say..." },
+                domProps: { value: _vm.form.body },
+                on: {
+                  keydown: function($event) {
+                    _vm.form.clearErrors()
+                  },
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.form, "body", $event.target.value)
+                  }
                 }
-              }
-            })
+              }),
+              _vm._v(" "),
+              _vm.form.errors.has("body")
+                ? _c("span", {
+                    staticClass: "help is-danger",
+                    domProps: {
+                      textContent: _vm._s(_vm.form.errors.get("body"))
+                    }
+                  })
+                : _vm._e()
+            ])
           ]),
           _vm._v(" "),
-          _c("button", { staticClass: "button is-primary" }, [_vm._v("Submit")])
+          _c("div", { staticClass: "field" }, [
+            _c("p", { staticClass: "control" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "button is-primary",
+                  attrs: { disabled: _vm.form.errors.any() }
+                },
+                [_vm._v("Submit")]
+              )
+            ])
+          ])
         ]
       )
     ])
