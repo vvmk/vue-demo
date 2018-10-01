@@ -15994,6 +15994,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     mounted: function mounted() {
         console.log("Component mounted.");
+    },
+
+    filters: {
+        ago: function ago(date) {
+            return __WEBPACK_IMPORTED_MODULE_0_moment___default()(date).fromNow();
+        },
+        capitalize: function capitalize(value) {
+            return value.toUpperCase();
+        }
     }
 });
 
@@ -16024,7 +16033,9 @@ var render = function() {
               _c("p", [
                 _vm._v(
                   "\n                    " +
-                    _vm._s(_vm.postedOn(status)) +
+                    _vm._s(
+                      _vm._f("capitalize")(_vm._f("ago")(status.createdAt))
+                    ) +
                     "\n                    "
                 )
               ])

@@ -9,7 +9,7 @@
                         </p>
 
                         <p>
-                        {{ postedOn(status) }}
+                        {{ status.createdAt | ago | capitalize }}
                         </p>
                     </div>
                     <div class="message-body" v-text="status.body">
@@ -40,6 +40,14 @@ export default {
     },
     mounted() {
         console.log("Component mounted.");
+    },
+    filters: {
+        ago(date) {
+            return moment(date).fromNow();
+        },
+        capitalize(value) {
+            return value.toUpperCase();
+        }
     }
 };
 </script>
