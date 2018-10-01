@@ -16002,6 +16002,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     methods: {
         postedOn: function postedOn(status) {
             return __WEBPACK_IMPORTED_MODULE_0_moment___default()(status.created_at).fromNow();
+        },
+        addStatus: function addStatus(status) {
+            this.statuses.unshift(status);
+
+            alert("status added");
+
+            window.scrollTo(0, 0);
         }
     },
     mounted: function mounted() {
@@ -16061,7 +16068,7 @@ var render = function() {
             ])
           }),
           _vm._v(" "),
-          _c("add-to-stream")
+          _c("add-to-stream", { on: { completed: _vm.addStatus } })
         ],
         2
       )
@@ -33084,8 +33091,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     methods: {
         onSubmit: function onSubmit() {
+            var _this = this;
+
             this.form.post("/statuses").then(function (status) {
-                return alert("All done!");
+                return _this.$emit("completed", status);
             });
         }
     }

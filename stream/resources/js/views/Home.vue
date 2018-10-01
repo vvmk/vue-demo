@@ -16,7 +16,7 @@
                     </div>
                 </div>
 
-                <add-to-stream></add-to-stream>
+                <add-to-stream @completed="addStatus"></add-to-stream>
             </div>
         </div>
     </div>
@@ -42,6 +42,13 @@ export default {
     methods: {
         postedOn(status) {
             return moment(status.created_at).fromNow();
+        },
+        addStatus(status) {
+            this.statuses.unshift(status);
+
+            alert("status added");
+
+            window.scrollTo(0, 0);
         }
     },
     mounted() {

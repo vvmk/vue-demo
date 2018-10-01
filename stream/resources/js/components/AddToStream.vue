@@ -24,7 +24,9 @@ export default {
     },
     methods: {
         onSubmit() {
-            this.form.post("/statuses").then(status => alert("All done!"));
+            this.form
+                .post("/statuses")
+                .then(status => this.$emit("completed", status));
         }
     }
 };
