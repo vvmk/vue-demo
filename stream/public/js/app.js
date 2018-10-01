@@ -3626,6 +3626,8 @@ new Vue({
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue__ = __webpack_require__(32);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue_router__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utilities_Form__ = __webpack_require__(180);
+
 
 
 
@@ -3649,6 +3651,8 @@ if (token) {
 } else {
     console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }
+
+window.Form = __WEBPACK_IMPORTED_MODULE_3__utilities_Form__["a" /* default */];
 
 /***/ }),
 /* 13 */
@@ -33059,8 +33063,33 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
-/* harmony default export */ __webpack_exports__["default"] = ({});
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            form: new Form({ body: "" })
+        };
+    },
+
+    methods: {
+        onSubmit: function onSubmit() {
+            this.form.post("/statuses").then(function (status) {
+                return alert("All done!");
+            });
+        }
+    }
+});
 
 /***/ }),
 /* 179 */
@@ -33070,7 +33099,52 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_vm._v("\n    foobar\n")])
+  return _c("div", { staticClass: "message" }, [
+    _c("div", { staticClass: "message-header" }, [
+      _vm._v("\n        Push to the Stream...\n    ")
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "message-body" }, [
+      _c(
+        "form",
+        {
+          on: {
+            submit: function($event) {
+              $event.preventDefault()
+              return _vm.onSubmit($event)
+            }
+          }
+        },
+        [
+          _c("p", { staticClass: "control" }, [
+            _c("textarea", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.form.body,
+                  expression: "form.body"
+                }
+              ],
+              staticClass: "textarea",
+              attrs: { placeholder: "I have something to say..." },
+              domProps: { value: _vm.form.body },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.form, "body", $event.target.value)
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("button", { staticClass: "button is-primary" }, [_vm._v("Submit")])
+        ]
+      )
+    ])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -33081,6 +33155,161 @@ if (false) {
     require("vue-hot-reload-api")      .rerender("data-v-bcc28afe", module.exports)
   }
 }
+
+/***/ }),
+/* 180 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Errors_js__ = __webpack_require__(181);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+
+
+var Form = function () {
+  function Form(data) {
+    _classCallCheck(this, Form);
+
+    this.originalData = data;
+
+    for (var field in data) {
+      this[field] = data[field];
+    }
+
+    this.errors = new __WEBPACK_IMPORTED_MODULE_0__Errors_js__["a" /* default */]();
+  }
+
+  _createClass(Form, [{
+    key: 'submit',
+    value: function submit(requestType, url) {
+      var _this = this;
+
+      return new Promise(function (resolve, reject) {
+
+        axios[requestType](url, _this.requestBody).then(function (response) {
+          var d = response.data;
+
+          _this.onSuccess(d);
+
+          resolve(d);
+        }).catch(function (error) {
+          var e = error.response.data.errors;
+
+          _this.onFail(e);
+
+          reject(e);
+        });
+      });
+    }
+  }, {
+    key: 'onSuccess',
+    value: function onSuccess(data) {
+      this.reset();
+    }
+  }, {
+    key: 'onFail',
+    value: function onFail(error) {
+      this.errors.record(error);
+    }
+  }, {
+    key: 'clearErrors',
+    value: function clearErrors(field) {
+      this.errors.clear(field);
+    }
+  }, {
+    key: 'reset',
+    value: function reset() {
+      for (var k in this.originalData) {
+        this[k] = '';
+      }
+
+      this.clearErrors();
+    }
+  }, {
+    key: 'post',
+    value: function post(url) {
+      return this.submit('post', url);
+    }
+  }, {
+    key: 'delete',
+    value: function _delete(url) {
+      return this.submit('delete', url);
+    }
+  }, {
+    key: 'requestBody',
+    get: function get() {
+      var d = {};
+
+      for (var prop in this.originalData) {
+        d[prop] = this[prop];
+      }
+
+      return d;
+    }
+  }]);
+
+  return Form;
+}();
+
+/* harmony default export */ __webpack_exports__["a"] = (Form);
+
+/***/ }),
+/* 181 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Errors = function () {
+  function Errors() {
+    _classCallCheck(this, Errors);
+
+    this.errors = {};
+  }
+
+  _createClass(Errors, [{
+    key: "get",
+    value: function get(field) {
+      if (this.errors[field]) {
+        return this.errors[field][0];
+      }
+    }
+  }, {
+    key: "record",
+    value: function record(errors) {
+      this.errors = errors;
+    }
+  }, {
+    key: "clear",
+    value: function clear(field) {
+      if (field) {
+        delete this.errors[field];
+
+        return;
+      }
+
+      this.errors = {};
+    }
+  }, {
+    key: "has",
+    value: function has(field) {
+      return !!this.errors[field];
+    }
+  }, {
+    key: "any",
+    value: function any() {
+      return Object.keys(this.errors).length > 0;
+    }
+  }]);
+
+  return Errors;
+}();
+
+/* harmony default export */ __webpack_exports__["a"] = (Errors);
 
 /***/ })
 /******/ ]);
